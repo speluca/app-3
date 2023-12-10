@@ -1,12 +1,13 @@
 import React from "react"
 import {View, Text} from "react-native"
+import styles from "./style";
 
 export default function ResultConv(props){
     return(
-        <View>
+        <View style={styles.contextConv}> 
              
-             <Text>{props.messageResultconv}</Text>
-             <Text>{props.Resultconv}</Text>
+             <Text style={styles.inform}>{props.messageResultconv}</Text>
+             <Text style={styles.numberImc}>{props.Resultconv}</Text>
         </View>
     );
 }

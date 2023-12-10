@@ -1,7 +1,9 @@
 import React, {useState} from "react"
-import { TextInput, View, Text, Button} from "react-native";
+import { TextInput, View, Text, Button, TouchableOpacity} from "react-native";
 import Resultimc from "../Resultimc";
 import ResultConv from "../ResultConv";
+import styles from "../Forms/style";
+
 export default function Forms3(){
     
     const[dinheiro, setDinheiro] = useState(null)
@@ -16,49 +18,52 @@ export default function Forms3(){
 
     const[TextButton,setTextButton] = useState("Converter")
     
-    function Conversor(){
+    function ConversorM(){
         return setDolar((dinheiro*4.90).toFixed(2)), setEuro((dinheiro*5.29).toFixed(2)), 
         setIene((dinheiro*0.033).toFixed(2))
     }
     
-    function validacao(){
+    function validacao3(){
         if(dinheiro!= null){
-        Conversor()
+        ConversorM()
         setDinheiro(null)
         setMessage(null)
         setMessagedolar("Em Dolar, a moeda equivale a:")
         setMessageeuro("Em Euro, a moeda equivale a:")
         setMessageiene("Em Iene, a moeda equivale a: ")
-        setTextButton("Converterr Novamente")
+        setTextButton("Converter Novamente")
         return
         }
+        setTextButton("Converter")
         setMessage("Preencha o Valor")
         setDolar(null)
         setEuro(null)
         setIene(null)
-        setTextButton("Converter")
         setMessagedolar(null)
         setMessageeuro(null)
         setMessageiene(null)
     }
 
     return(
-        <View>
-             <View>
+        <View style={styles.formContext}>  
+             <View style={styles.form}>
 
-                <Text>Valor em Reais</Text>
-                <TextInput onChangeText={setDinheiro} 
+                <Text style={styles.formLabel}>Valor em Reais</Text>
+                <TextInput style={styles.imput} onChangeText={setDinheiro} 
                 value={dinheiro}
                 placeholder="Ex:1000"
                 keyboardType="numeric"></TextInput>
 
-
-                <Button onPress={()=>validacao()} title={TextButton}/>
-
+                <TouchableOpacity style={styles.buttonCalculator}
+                onPress={()=>{
+                    validacao3()
+                }}>
+                    <Text style={styles.textButtonCalculator}>{TextButton}</Text>
+                </TouchableOpacity>
              </View>
-             <Resultimc messageResultimc={messagedolar} Resultimc={dolar}/>
-             <Resultimc messageResultimc={messageeuro} Resultimc={euro}/>
-             <Resultimc messageResultimc={messageiene} Resultimc={iene}/>
+             <ResultConv messageResultconv={messagedolar} ResultConv={dolar}/>
+             <ResultConv messageResultconv={messageeuro} ResultConv={euro}/>
+             <ResultConv messageResultconv={messageiene} ResultConv={iene}/>
         </View>
         
     );

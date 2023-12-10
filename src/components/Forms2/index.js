@@ -1,6 +1,8 @@
 import React, {useState} from "react"
-import { TextInput, View, Text, Button} from "react-native";
+import { TextInput, View, Text, Button, TouchableOpacity} from "react-native";
 import Resultgorj from "../ResultGorj";
+import styles from "../Forms/style";
+import style from "../title2/style";
 export default function Forms2(){
     
     const[valor, setValor] = useState(null)
@@ -29,23 +31,28 @@ export default function Forms2(){
     }
 
     return(
-        <View>
-             <View>
+        <View style={styles.formContext}>
+             <View style={styles.form}>
 
-                <Text>Dinheiro</Text>
-                <TextInput onChangeText={setValor} 
+                <Text style={styles.formLabel}>Dinheiro</Text>
+                <TextInput style={styles.imput} onChangeText={setValor} 
                 value={valor}
                 placeholder="Ex:100"
                 keyboardType="numeric"></TextInput>
 
-                <Text>Porcentagem da Gorjeta</Text>
-                <TextInput onChangeText={setPorc}
+                <Text style={styles.formLabel}>Porcentagem da Gorjeta</Text>
+                <TextInput style={styles.imput} onChangeText={setPorc}
                 value={porc}
                 placeholder="Ex:3"
                 keyboardType="numeric"></TextInput>
 
-                <Button onPress={()=>validacao2()} title={TextButton}/>
-
+                
+                <TouchableOpacity style={styles.buttonCalculator}
+                onPress={()=>{
+                    validacao2()
+                }}>
+                    <Text style={styles.textButtonCalculator}>{TextButton}</Text>
+                </TouchableOpacity>
              </View>
              <Resultgorj messageResultgorj={messagegorj} Resultgorj={gorj}/>
         </View>
